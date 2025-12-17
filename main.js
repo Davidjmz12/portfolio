@@ -60,6 +60,8 @@ function closeModal(modal, showMainContent = true) {
                 const container = document.querySelector('.container');
                 if (container) {
                     container.classList.remove('hidden');
+                    container.style.opacity = '';
+                    container.style.pointerEvents = '';
                 }
             }, 300);
 
@@ -90,6 +92,8 @@ function closeAllModals() {
     const container = document.querySelector('.container');
     if (container) {
         container.classList.remove('hidden');
+        container.style.opacity = '';
+        container.style.pointerEvents = '';
     }
 
     window.history.pushState(null, '', ' ');
@@ -192,10 +196,21 @@ function openProjectDetails(projectId) {
     // Update URL hash for persistence
     window.history.pushState(null, '', `#project/${projectId}`);
 
-    // Ensure we keep main content hidden
+    // STRICTLY ENDURE MAIN CONTENT IS HIDDEN
+    // We clear any potential timeouts that might be scheduled to show the content
+    // Use a global variable or attribute to track if we are in "modal mode"
     const container = document.querySelector('.container');
     if (container) {
+        // Force styling immediately
         container.classList.add('hidden');
+        container.style.opacity = '0';
+        container.style.pointerEvents = 'none';
+
+        // Double check after a short delay to override any transition endings
+        setTimeout(() => {
+            container.classList.add('hidden');
+            container.style.opacity = '0';
+        }, 350);
     }
 
     // EVENT LISTENERS FOR NEW MODAL
@@ -206,7 +221,7 @@ function openProjectDetails(projectId) {
         // Close details, don't show main content
         closeModal(modalOverlay, false);
         // Reopen projects modal immediately
-        setTimeout(() => openModal('modal-projects'), 50);
+        setTimeout(() => openModal('modal-projects', false), 50);
     });
 
     // 2. Click outside (Closes everything, goes to home - standard behavior)

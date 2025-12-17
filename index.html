@@ -237,7 +237,7 @@
                     <!-- Project Card 1: Path Tracer -->
                     <div class="project-card" data-project-id="path-tracer">
                         <div class="project-image">
-                            <img src="./assets/project1.png" alt="Path Tracer">
+                            <img src="./assets/main_scene.png" alt="Path Tracer">
                         </div>
                         <div class="project-info">
                             <a href="#" class="project-title">Path Tracer and Photon Mapping</a>
@@ -330,27 +330,73 @@
     <div class="project-details-container">
         <!-- Path Tracer Details -->
         <div class="project-details" id="path-tracer-details">
-            <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 12px; border: 1px dashed var(--glass-border);">
-                <span style="color: var(--text-secondary); font-size: 1.2rem;">[Project Image Placeholder]</span>
-            </div>
+            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
 
             <h1>Project Overview</h1>
-            <p>Placeholder text for the project overview.</p>
+            <p>
+                This project implements from scratch a path tracer and photon mapping renderer using C++ and CMake.
+                The renderer is able to render scenes with realistic lighting, different materials like glass, metal,
+                plastic, etc. and different shapes like spheres, cylinders, planes, etc.
+            </p>
 
-            <h2>Technical Details</h2>
+            <h1>Technical Details</h1>
+            <h2>Geometries</h2>
+            <div class="project-image-row">
+                <img src="./assets/g1.png" alt="Geometries" class="project-content-image">
+                <img src="./assets/g2.png" alt="Geometries" class="project-content-image">
+            </div>
+            It supports the following geometries:
             <ul>
-                <li>Feature 1 details...</li>
-                <li>Feature 2 details...</li>
+                <li>Spheres, cylinders, planes, cones, ellipsoids, boxes.</li>
+                <li>Triangle meshes for arbitrary 3D shapes</li>
             </ul>
+
+            <h2>Textures</h2>
+            <div class="project-image-row">
+                <img src="./assets/t1.png" alt="Textures" class="project-content-image">
+                <img src="./assets/ply2.png" alt="Textures" class="project-content-image">
+            </div>
+            It supports textures for both 3D triangle meshes and the other geometries. The input texture must be in
+            <b>PPM</b> format.
+
+            <h2>Optimization</h2>
+            <p>
+                The renderer is optimized for performance using different techniques:
+            <ul>
+                <li><b>Multithreading</b></li>
+                <li><b>Bounding box</b> for efficient ray intersection with 3D triangle meshes. Surround the whole 3D
+                    figure using a box. When light rays don't intersect with the box, we can skip the intersection test
+                    with all the triangles of the mesh.</li>
+                <li><b>Kd-trees</b> for efficient ray intersection with 3D triangle meshes. Divides the triangles of the
+                    mesh into smaller groups to reduce the number of intersection tests.</li>
+            </ul>
+            <div class="project-image-row">
+                <img src="./assets/intersections_avoided.png" alt="Intersections Avoided" class="project-content-image">
+                <img src="./assets/threads.png" alt="Threads" class="project-content-image">
+            </div>
+            </p>
+            <h3>Results</h3>
+            <p>The implementation of threads reduced the rendering time by a factor equal to the number of threads used
+                (up to a point).
+                <br>
+                The implementation of bounding boxes and Kd-trees allowed to render in a feasible time the scenes with
+                complex geometries. Without them, it would be impossible to render scenes with complex geometries in a
+                feasible time.
+            </p>
+
+            <h2>XML parser</h2>
+            <p>
+                The renderer is able to parse XML files to load the scene. The XML file contains the description of the
+                scene, including the geometries, the materials, the lights, the camera, etc.
+            </p>
+            <div class="project-image-row">
+                <img src="./assets/xml.png" alt="XML" class="project-content-image">
+            </div>
         </div>
 
         <!-- Card Game Details -->
         <div class="project-details" id="card-game-details">
-            <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 12px; border: 1px dashed var(--glass-border);">
-                <span style="color: var(--text-secondary); font-size: 1.2rem;">[Project Image Placeholder]</span>
-            </div>
+            <img src="./assets/card_game.png" alt="Card Game" class="project-header-image">
 
             <h1>Project Overview</h1>
             <p>Placeholder text for the project overview.</p>
@@ -364,8 +410,7 @@
 
         <!-- Mobile Robotics Details -->
         <div class="project-details" id="mobile-robotics-details">
-            <img src="./assets/robot.jpg" alt="Mobile Robotics"
-                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+            <img src="./assets/robot.jpg" alt="Mobile Robotics" class="project-header-image">
 
             <h1>Project Overview</h1>
             <p>
@@ -388,8 +433,7 @@
             <h1>Technical Implementation</h1>
 
             <h2>Path Planning & Navigation</h2>
-            <video src="./assets/A*.mp4" controls
-                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+            <video src="./assets/A*.mp4" controls class="project-content-image">
             </video>
             <p>
                 For navigating complex maze environments, we implemented the <b>A* Algorithm</b> on an 8-directional
@@ -412,8 +456,7 @@
             </p>
 
             <h2>Computer Vision: Ball Tracking</h2>
-            <img src="./assets/catchh.png" alt="Ball Tracking"
-                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+            <img src="./assets/catchh.png" alt="Ball Tracking" class="project-content-image">
             <p>
                 The visual tracking system processes camera input to identify and approach target objects. The pipeline
                 includes:
@@ -429,8 +472,7 @@
             </ul>
 
             <h2>Feature-Based Image Detection</h2>
-            <img src="./assets/tracking.png" alt="Image Detection"
-                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+            <img src="./assets/tracking.png" alt="Image Detection" class="project-content-image">
             <p>
                 To recognize specific markers or locations, the robot employs a feature matching pipeline:
             </p>

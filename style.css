@@ -792,6 +792,60 @@ body {
     transform: scale(1.02);
 }
 
+/* Common Project Image Styles */
+.project-header-image,
+.project-content-image {
+    display: block;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.project-header-image {
+    width: 90%;
+    height: auto;
+    object-fit: cover;
+    margin: 2rem auto;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.project-content-image {
+    width: 50%;
+    height: auto;
+    object-fit: cover;
+    margin: 2rem auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover Effects */
+.project-header-image:hover,
+.project-content-image:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(79, 172, 254, 0.2);
+    /* Subtle blue glow */
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.project-image-row {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin: 2rem auto;
+    width: 70%;
+}
+
+.project-image-row .project-content-image {
+    width: 50%;
+    flex: 1;
+    margin: 0;
+    object-fit: contain;
+    height: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    /* Re-apply base shadow as it might be nested */
+}
+
 /* MathJax Adjustment */
 mjx-container {
     font-size: 1.1em !important;
