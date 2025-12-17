@@ -551,6 +551,49 @@ body {
     .social-links {
         gap: var(--spacing-sm);
     }
+
+    /* Better Modal Spacing on Mobile */
+    .modal-content {
+        padding: var(--spacing-md);
+        /* Reduced padding */
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        /* Full screen feel */
+        max-height: 100vh;
+        border-radius: 0;
+        /* Remove radius for full screen effect if desired, or keep small */
+    }
+
+    .modal-overlay {
+        padding: 0;
+        /* Maximize space */
+    }
+
+    .modal-header {
+        margin-bottom: var(--spacing-md);
+        position: sticky;
+        top: 0;
+        background: inherit;
+        z-index: 10;
+        backdrop-filter: blur(12px);
+        /* Maintain glass effect */
+        margin-top: -10px;
+        /* Offset for sticky header visual */
+        padding-top: 10px;
+    }
+
+    /* Date Badge Fix for Mobile */
+    .date-badge {
+        white-space: normal;
+        text-align: left;
+        font-size: 0.8rem;
+    }
+
+    .education-header,
+    .experience-header {
+        gap: 0.5rem;
+    }
 }
 
 /* ==================== ABOUT ME SECTION ==================== */
@@ -630,7 +673,7 @@ body {
     border-radius: 20px;
     font-size: var(--font-size-sm);
     color: var(--text-primary);
-    white-space: nowrap;
+    /* white-space: nowrap; Removed to avoid overflow on small screens */
 }
 
 .university,
