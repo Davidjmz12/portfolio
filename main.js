@@ -12,8 +12,9 @@ const closeButtons = document.querySelectorAll('.modal-close');
 /**
  * Opens a modal by its ID
  * @param {string} modalId - The ID of the modal to open
+ * @param {boolean} updateHash - Whether to update the URL hash
  */
-function openModal(modalId) {
+function openModal(modalId, updateHash = true) {
     const modal = document.getElementById(modalId);
     if (modal) {
         // Hide main page content
@@ -22,32 +23,49 @@ function openModal(modalId) {
             container.classList.add('hidden');
         }
 
-        // Open modal after a short delay for smooth transition
+        // Set active class
+        // Use a small timeout only if we are not switching from another modal
+        // But for simplicity and smoothness, we can just add it. 
+        // However, keeping the requested logic:
         setTimeout(() => {
             modal.classList.add('active');
-            // Prevent body scroll when modal is open
             document.body.style.overflow = 'hidden';
-        }, 100);
+        }, 10); // Reduced delay for snappier feel
+
+        // Update URL hash
+        if (updateHash) {
+            // Extract plain name if possible, e.g., 'about' from 'modal-about'
+            const hashName = modalId.replace('modal-', '').replace('project-', 'project/');
+            // If it's a project detail, it might have a slash
+            window.history.pushState(null, '', `#${hashName}`);
+        }
     }
 }
 
 /**
  * Closes a modal
  * @param {HTMLElement} modal - The modal element to close
+ * @param {boolean} showMainContent - Whether to show the main content after closing
  */
-function closeModal(modal) {
+function closeModal(modal, showMainContent = true) {
     if (modal) {
         modal.classList.remove('active');
-        // Restore body scroll
-        document.body.style.overflow = '';
 
-        // Show main page content after modal closes
-        setTimeout(() => {
-            const container = document.querySelector('.container');
-            if (container) {
-                container.classList.remove('hidden');
-            }
-        }, 300);
+        if (showMainContent) {
+            // Restore body scroll
+            document.body.style.overflow = '';
+
+            // Show main page content after modal closes
+            setTimeout(() => {
+                const container = document.querySelector('.container');
+                if (container) {
+                    container.classList.remove('hidden');
+                }
+            }, 300);
+
+            // Clear hash
+            window.history.pushState(null, '', ' ');
+        }
     }
 }
 
@@ -58,6 +76,14 @@ function closeAllModals() {
     modals.forEach(modal => {
         modal.classList.remove('active');
     });
+
+    // Also close dynamic details modal if exists
+    const detailsModal = document.getElementById('modal-project-details');
+    if (detailsModal) {
+        detailsModal.classList.remove('active');
+        setTimeout(() => detailsModal.remove(), 300);
+    }
+
     document.body.style.overflow = '';
 
     // Show main page content
@@ -65,6 +91,8 @@ function closeAllModals() {
     if (container) {
         container.classList.remove('hidden');
     }
+
+    window.history.pushState(null, '', ' ');
 }
 
 // Add click event listeners to navigation buttons
@@ -76,7 +104,7 @@ navButtons.forEach(button => {
     });
 });
 
-// Add click event listeners to close buttons
+// Add click event listeners to close buttons (static ones)
 closeButtons.forEach(button => {
     button.addEventListener('click', () => {
         const modal = button.closest('.modal-overlay');
@@ -96,7 +124,14 @@ modals.forEach(modal => {
 // Close modal with Escape key
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-        closeAllModals();
+        // If project details are open, go back to projects list
+        const detailsModal = document.getElementById('modal-project-details');
+        if (detailsModal && detailsModal.classList.contains('active')) {
+            closeModal(detailsModal, false); // Don't show main content yet
+            openModal('modal-projects');
+        } else {
+            closeAllModals();
+        }
     }
 });
 
@@ -108,9 +143,12 @@ document.addEventListener('keydown', (e) => {
  * @param {string} projectId - The ID of the project to display
  */
 function openProjectDetails(projectId) {
-    // Close the projects modal first
+    // 1. Swap modals directly without showing main page content
     const projectsModal = document.getElementById('modal-projects');
-    closeModal(projectsModal);
+    if (projectsModal) {
+        projectsModal.classList.remove('active');
+        // We do NOT call closeModal here because we don't want to trigger the main content fade-in
+    }
 
     // Get project details from HTML
     const detailsElement = document.getElementById(`${projectId}-details`);
@@ -127,7 +165,7 @@ function openProjectDetails(projectId) {
     const detailsModalId = 'modal-project-details';
     let detailsModal = document.getElementById(detailsModalId);
 
-    // Remove existing details modal if it exists
+    // Remove existing details modal if it exists to ensure freshness
     if (detailsModal) {
         detailsModal.remove();
     }
@@ -140,7 +178,7 @@ function openProjectDetails(projectId) {
     modalOverlay.innerHTML = `
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title">${projectTitle}</h2>
+        <h2 class="modal-title" style="margin: 0 auto;">${projectTitle}</h2>
         <button class="modal-close btn-glass" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
@@ -151,59 +189,104 @@ function openProjectDetails(projectId) {
 
     document.body.appendChild(modalOverlay);
 
-    // Add event listeners
+    // Update URL hash for persistence
+    window.history.pushState(null, '', `#project/${projectId}`);
+
+    // Ensure we keep main content hidden
+    const container = document.querySelector('.container');
+    if (container) {
+        container.classList.add('hidden');
+    }
+
+    // EVENT LISTENERS FOR NEW MODAL
+
+    // 1. Close button (Behaves as Back button: Goes back to project list)
     const closeButton = modalOverlay.querySelector('.modal-close');
     closeButton.addEventListener('click', () => {
-        closeModal(modalOverlay);
-        // Reopen projects modal after closing details
-        setTimeout(() => openModal('modal-projects'), 300);
+        // Close details, don't show main content
+        closeModal(modalOverlay, false);
+        // Reopen projects modal immediately
+        setTimeout(() => openModal('modal-projects'), 50);
     });
 
+    // 2. Click outside (Closes everything, goes to home - standard behavior)
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
-            closeModal(modalOverlay);
-            // Reopen projects modal after closing details
-            setTimeout(() => openModal('modal-projects'), 300);
+            closeModal(modalOverlay, true);
         }
     });
 
-    // Open the details modal
+    // Open the details modal immediately
     setTimeout(() => {
-        openModal(detailsModalId);
-    }, 100);
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }, 50);
 }
 
 // ==================== PROJECT CARD CLICK HANDLERS ====================
 
 // Add click event listeners to all project cards
-document.addEventListener('DOMContentLoaded', () => {
+function initProjectCards() {
     const projectCards = document.querySelectorAll('.project-card');
 
     projectCards.forEach(card => {
         const projectId = card.getAttribute('data-project-id');
         const projectTitle = card.querySelector('.project-title');
-        const projectPageBtn = card.querySelector('.project-btn');
+        const projectPageBtn = card.querySelector('.project-buttons .project-btn:first-child');
 
-        // Make the title clickable
+        // Clickable Title
         if (projectTitle && projectId) {
-            projectTitle.addEventListener('click', (e) => {
+            // Remove old listeners to avoid duplicates if re-init
+            const newTitle = projectTitle.cloneNode(true);
+            projectTitle.parentNode.replaceChild(newTitle, projectTitle);
+
+            newTitle.addEventListener('click', (e) => {
                 e.preventDefault();
                 openProjectDetails(projectId);
             });
-            projectTitle.style.cursor = 'pointer';
+            newTitle.style.cursor = 'pointer';
         }
 
-        // Make the "Project page" button clickable
+        // Clickable Project Page Button (assuming first button is "Project page")
         if (projectPageBtn && projectId) {
-            projectPageBtn.addEventListener('click', (e) => {
+            // Clone to remove old listeners
+            const newBtn = projectPageBtn.cloneNode(true);
+            projectPageBtn.parentNode.replaceChild(newBtn, projectPageBtn);
+
+            newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 openProjectDetails(projectId);
             });
         }
     });
-});
+}
 
-// ==================== SMOOTH ANIMATIONS ====================
+// ==================== ROUTING / STATE PERSISTENCE ====================
+
+function checkHash() {
+    const hash = window.location.hash.substring(1); // Remove #
+
+    if (!hash) return;
+
+    if (hash === 'projects') {
+        openModal('modal-projects', false);
+    } else if (hash === 'about') {
+        openModal('modal-about', false);
+    } else if (hash === 'contact') {
+        openModal('modal-contact', false);
+    } else if (hash.startsWith('project/')) {
+        const projectId = hash.split('/')[1];
+        if (projectId) {
+            // First open projects modal in background (optional, but good for back nav context)
+            // But to avoid flashing, we might just open details directly.
+            // Let's open details directly.
+            openProjectDetails(projectId);
+        }
+    }
+}
+
+
+// ==================== INITIALIZATION ====================
 
 /**
  * Adds entrance animations to elements when the page loads
@@ -221,7 +304,19 @@ function initAnimations() {
     }, 100);
 }
 
-// Initialize animations when DOM is loaded
+// Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
+    initProjectCards();
+
+    // Check URL hash for direct access (reload persistence)
+    setTimeout(checkHash, 200); // Slight delay to ensure DOM is ready and animations started
+});
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', () => {
+    // specific logic could go here, but for now simple hash check might conflict with modal states
+    // A full router is overkill, but basic handling:
+    closeAllModals();
+    checkHash();
 });

@@ -706,6 +706,99 @@ body {
     line-height: 1.6;
 }
 
+/* ==================== PROJECT DETAILS CONTENT STYLING ==================== */
+.project-details h1 {
+    font-size: var(--font-size-2xl);
+    color: #fff;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--spacing-xs);
+    letter-spacing: 0.5px;
+}
+
+.project-details h2 {
+    font-size: var(--font-size-xl);
+    color: var(--text-primary);
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+.project-details h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 70%;
+    background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+    border-radius: 2px;
+}
+
+.project-details h3 {
+    font-size: var(--font-size-lg);
+    color: var(--text-primary);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 600;
+}
+
+.project-details p {
+    font-size: var(--font-size-base);
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-md);
+    text-align: justify;
+}
+
+.project-details b,
+.project-details strong {
+    color: #fff;
+    font-weight: 600;
+    background: rgba(79, 172, 254, 0.1);
+    padding: 0 4px;
+    border-radius: 4px;
+}
+
+.project-details ul,
+.project-details ol {
+    margin-left: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+}
+
+.project-details li {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.6;
+    color: var(--text-secondary);
+    padding-left: var(--spacing-xs);
+}
+
+.project-details li::marker {
+    color: #4facfe;
+}
+
+.project-details img,
+.project-details video {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--glass-border);
+    transition: transform 0.3s ease;
+}
+
+.project-details img:hover,
+.project-details video:hover {
+    transform: scale(1.02);
+}
+
+/* MathJax Adjustment */
+mjx-container {
+    font-size: 1.1em !important;
+    color: var(--text-primary) !important;
+    margin: var(--spacing-md) 0 !important;
+}
+
 /* Responsive adjustments for About section */
 @media (max-width: 768px) {
 

@@ -330,97 +330,118 @@
     <div class="project-details-container">
         <!-- Path Tracer Details -->
         <div class="project-details" id="path-tracer-details">
-            <h2>Title 1: Project Overview</h2>
             <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 8px;">
-                <span style="color: var(--text-secondary);">[Image Placeholder]</span>
+                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 12px; border: 1px dashed var(--glass-border);">
+                <span style="color: var(--text-secondary); font-size: 1.2rem;">[Project Image Placeholder]</span>
             </div>
-            <h3>Title 1.1: Core Features</h3>
-            <p>Placeholder text for core features description.</p>
-            <h4>Title 1.1.1: Technical Implementation</h4>
-            <p>Placeholder text for technical implementation details.</p>
+
+            <h1>Project Overview</h1>
+            <p>Placeholder text for the project overview.</p>
+
+            <h2>Technical Details</h2>
+            <ul>
+                <li>Feature 1 details...</li>
+                <li>Feature 2 details...</li>
+            </ul>
         </div>
 
         <!-- Card Game Details -->
         <div class="project-details" id="card-game-details">
-            <h2>Title 1: Architecture</h2>
             <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 8px;">
-                <span style="color: var(--text-secondary);">[Image Placeholder]</span>
+                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 12px; border: 1px dashed var(--glass-border);">
+                <span style="color: var(--text-secondary); font-size: 1.2rem;">[Project Image Placeholder]</span>
             </div>
-            <h3>Title 1.1: Database Design</h3>
-            <p>Placeholder text for database schema and design.</p>
-            <h4>Title 1.1.1: API Endpoints</h4>
-            <p>Placeholder text for API documentation.</p>
+
+            <h1>Project Overview</h1>
+            <p>Placeholder text for the project overview.</p>
+
+            <h2>Technical Details</h2>
+            <ul>
+                <li>Feature 1 details...</li>
+                <li>Feature 2 details...</li>
+            </ul>
         </div>
 
         <!-- Mobile Robotics Details -->
         <div class="project-details" id="mobile-robotics-details">
             <img src="./assets/robot.jpg" alt="Mobile Robotics"
-                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
-            <h1>Description</h1>
-            <p>The project consists of a control software for a self constructed robot using <b>brickpi3</b>. The robot
-                is able to
-                <li>Follow a straight or circular trajectory.</li>
-                <li>Navigate through a maze-like environment with possible obstacles.</li>
-                <li>Track a red ball and follow it to grab it using a retractable arm.</li>
-                <li>Detect and compare images using OpenCV features matching.</li>
-            </p>
-            <h2>Technical Implementation</h2>
-            <h3>Path Planning</h3>
-            <video src="./assets/A*.mp4" controls
-                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
-            </video>
-            <p>The path planning for maze-like environments is based on the A* algorithm using a 8-directional grid.
-                This is a better option than a basic 4-directional BFS as it allows the robot to navigate through the
-                maze more efficiently.
+                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+
+            <h1>Project Overview</h1>
+            <p>
+                This project focuses on developing robust <b>control software</b> for a custom-built robot based on the
+                <b>BrickPi3</b> platform.
+                The system was designed to handle autonomous navigation, object tracking, and environment interaction
+                through computer vision.
             </p>
             <p>
-                The heuristic function computes the straight-line cell-distance between the current node \(a\) and the
-                goal \(b\) supposing no obstacles. The formula is
+                Key capabilities include:
+            </p>
+            <ul>
+                <li>Following complex <b>straight or circular trajectories</b> with high precision.</li>
+                <li>Navigating autonomous through <b>maze-like environments</b> while avoiding dynamic obstacles.</li>
+                <li>Real-time <b>object tracking</b> (specifically a red ball) and manipulation using a retractable
+                    robotic arm.</li>
+                <li>Advanced <b>image recognition</b> and comparison using OpenCV feature matching.</li>
+            </ul>
+
+            <h1>Technical Implementation</h1>
+
+            <h2>Path Planning & Navigation</h2>
+            <video src="./assets/A*.mp4" controls
+                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
+            </video>
+            <p>
+                For navigating complex maze environments, we implemented the <b>A* Algorithm</b> on an 8-directional
+                grid.
+                This approach significantly outperforms basic 4-directional BFS by finding optimal paths including
+                diagonal movements.
+            </p>
+            <p>
+                The heuristic function minimizes the total estimated cost by computing the straight-line cell distance
+                (Chebyshev distance) between the current node \(a\) and the goal \(b\):
+            </p>
+            <p style="text-align: center; font-size: 1.2em; margin: 1.5rem 0;">
                 \[h(a,b) = \max(|a_x - b_x|, |a_y - b_y|)\]
             </p>
             <p>
-                To detect obstacles, the robot uses the frontal and right ultrasonic sensors. When an obstacle is
-                detected, the robot
-                re-plans the path to avoid it.
+                <b>Obstacle Avoidance:</b> The robot utilizes frontal and right-side <b>ultrasonic sensors</b> to map
+                the environment in real-time.
+                Upon detecting an obstacle, the system dynamically re-calculates the optimal path to ensure
+                collision-free navigation.
             </p>
 
-            <h3>Ball tracking</h3>
-            <image src="./assets/catchh.png" alt="Ball Tracking"
-                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
-            </image>
+            <h2>Computer Vision: Ball Tracking</h2>
+            <img src="./assets/catchh.png" alt="Ball Tracking"
+                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
             <p>
-                For ball tracking, the robot uses the camera to detect the ball. In order to do so:
-                <li>
-                    The camera captures frames from the environment and transforms them to HSV color space.
-                </li>
-                <li>
-                    A color threshold is applied to the frame to detect the red ball.
-                </li>
-                <li>
-                    Using `cv2.SimpleBlobDetector`, the ball is detected and its position is computed.
-                </li>
-                <li>
-                    The ball area is computed and used to control the robot's movement. When the area matches a certain
-                    threshold, the robot stops to grab it.
-                </li>
+                The visual tracking system processes camera input to identify and approach target objects. The pipeline
+                includes:
             </p>
-            <h3>Image detection</h3>
+            <ul>
+                <li><b>Color Space Transformation:</b> Converting frames to <b>HSV space</b> for more robust color
+                    segmentation under varying lighting.</li>
+                <li><b>Thresholding:</b> Applying a specific color mask to isolate the red ball.</li>
+                <li><b>Blob Detection:</b> Using <code>cv2.SimpleBlobDetector</code> to compute the centroid and radius
+                    of the target.</li>
+                <li><b>Visual Servoing:</b> Using the detected ball's area as a depth proxy to control forward velocity,
+                    stopping precisely when within grasping range.</li>
+            </ul>
+
+            <h2>Feature-Based Image Detection</h2>
             <img src="./assets/tracking.png" alt="Image Detection"
-                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
+                style="width: 70%; max-height: 400px; object-fit: cover; margin: 2rem auto; border-radius: 12px; display: block;">
             <p>
-                For image detection, the robot uses a:
-                <li>
-                    Feature Detection and Descriptor Computation using ORB.
-                </li>
-                <li>
-                    Feature Matching using Brute force Hamming distance with cross-check.
-                </li>
-                <li>
-                    Outlier Rejection using RANSAC.
-                </li>
+                To recognize specific markers or locations, the robot employs a feature matching pipeline:
             </p>
+            <ul>
+                <li><b>Feature Extraction:</b> Utilizing the <b>ORB (Oriented FAST and Rotated BRIEF)</b> detector for
+                    efficient real-time performance.</li>
+                <li><b>Matching:</b> Performing Brute-Force matching with <b>Hamming distance</b> and cross-check
+                    validation.</li>
+                <li><b>Outlier Rejection:</b> Applying <b>RANSAC</b> to filter false matches and ensure robust
+                    recognition.</li>
+            </ul>
 
             <script type="text/javascript" id="MathJax-script" async
                 src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
@@ -429,15 +450,19 @@
 
         <!-- Embedded Systems Details -->
         <div class="project-details" id="embedded-systems-details">
-            <h2>Title 1: System Architecture</h2>
             <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 8px;">
-                <span style="color: var(--text-secondary);">[Image Placeholder]</span>
+                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 12px; border: 1px dashed var(--glass-border);">
+                <span style="color: var(--text-secondary); font-size: 1.2rem;">[Project Image Placeholder]</span>
             </div>
-            <h3>Title 1.1: Power Optimization</h3>
-            <p>Placeholder text for power consumption analysis.</p>
-            <h4>Title 1.1.1: Hardware Abstraction</h4>
-            <p>Placeholder text for modular driver implementation.</p>
+
+            <h1>Project Overview</h1>
+            <p>Placeholder text for the project overview.</p>
+
+            <h2>Technical Details</h2>
+            <ul>
+                <li>Feature 1 details...</li>
+                <li>Feature 2 details...</li>
+            </ul>
         </div>
     </div>
 
