@@ -301,6 +301,34 @@ function checkHash() {
 }
 
 
+// ==================== CONTACT FORM FUNCTIONALITY ====================
+
+/**
+ * Handles contact form submission by opening mailto link
+ * @param {Event} e - Submit event
+ */
+function handleContactSubmit(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value || 'Portfolio Contact';
+    const message = document.getElementById('message').value;
+
+    const destination = 'davidjmzom1@gmail.com';
+
+    // Construct body with proper encoding
+    const body = `Name: ${name}
+Email: ${email}
+    
+Message:
+${message}`;
+
+    const mailtoUrl = `mailto:${destination}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailtoUrl;
+}
+
 // ==================== INITIALIZATION ====================
 
 /**
@@ -323,6 +351,12 @@ function initAnimations() {
 document.addEventListener('DOMContentLoaded', () => {
     initAnimations();
     initProjectCards();
+
+    // Init Contact Form
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleContactSubmit);
+    }
 
     // Check URL hash for direct access (reload persistence)
     setTimeout(checkHash, 200); // Slight delay to ensure DOM is ready and animations started
