@@ -281,7 +281,7 @@
                     <!-- Project Card 3: Mobile Robotics -->
                     <div class="project-card" data-project-id="mobile-robotics">
                         <div class="project-image">
-                            <img src="./assets/project1.png" alt="Mobile Robotics">
+                            <img src="./assets/robot.jpg" alt="Mobile Robotics">
                         </div>
                         <div class="project-info">
                             <a href="#" class="project-title">Mobile Robotics Project</a>
@@ -356,15 +356,75 @@
 
         <!-- Mobile Robotics Details -->
         <div class="project-details" id="mobile-robotics-details">
-            <h2>Title 1: Robot Control & Vision</h2>
-            <div class="project-image-placeholder"
-                style="width: 100%; height: 300px; background-color: rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; margin: 2rem 0; border-radius: 8px;">
-                <span style="color: var(--text-secondary);">[Image Placeholder]</span>
-            </div>
-            <h3>Title 1.1: Path Planning</h3>
-            <p>Placeholder text for A* algorithm and navigation.</p>
-            <h4>Title 1.1.1: Object Detection</h4>
-            <p>Placeholder text for OpenCV implementation.</p>
+            <img src="./assets/robot.jpg" alt="Mobile Robotics"
+                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
+            <h1>Description</h1>
+            <p>The project consists of a control software for a self constructed robot using <b>brickpi3</b>. The robot
+                is able to
+                <li>Follow a straight or circular trajectory.</li>
+                <li>Navigate through a maze-like environment with possible obstacles.</li>
+                <li>Track a red ball and follow it to grab it using a retractable arm.</li>
+                <li>Detect and compare images using OpenCV features matching.</li>
+            </p>
+            <h2>Technical Implementation</h2>
+            <h3>Path Planning</h3>
+            <video src="./assets/A*.mp4" controls
+                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
+            </video>
+            <p>The path planning for maze-like environments is based on the A* algorithm using a 8-directional grid.
+                This is a better option than a basic 4-directional BFS as it allows the robot to navigate through the
+                maze more efficiently.
+            </p>
+            <p>
+                The heuristic function computes the straight-line cell-distance between the current node \(a\) and the
+                goal \(b\) supposing no obstacles. The formula is
+                \[h(a,b) = \max(|a_x - b_x|, |a_y - b_y|)\]
+            </p>
+            <p>
+                To detect obstacles, the robot uses the frontal and right ultrasonic sensors. When an obstacle is
+                detected, the robot
+                re-plans the path to avoid it.
+            </p>
+
+            <h3>Ball tracking</h3>
+            <image src="./assets/catchh.png" alt="Ball Tracking"
+                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
+            </image>
+            <p>
+                For ball tracking, the robot uses the camera to detect the ball. In order to do so:
+                <li>
+                    The camera captures frames from the environment and transforms them to HSV color space.
+                </li>
+                <li>
+                    A color threshold is applied to the frame to detect the red ball.
+                </li>
+                <li>
+                    Using `cv2.SimpleBlobDetector`, the ball is detected and its position is computed.
+                </li>
+                <li>
+                    The ball area is computed and used to control the robot's movement. When the area matches a certain
+                    threshold, the robot stops to grab it.
+                </li>
+            </p>
+            <h3>Image detection</h3>
+            <img src="./assets/tracking.png" alt="Image Detection"
+                style="width: 50%; height: 50%; object-fit: cover; margin: 2rem auto; border-radius: 8px; display: block;">
+            <p>
+                For image detection, the robot uses a:
+                <li>
+                    Feature Detection and Descriptor Computation using ORB.
+                </li>
+                <li>
+                    Feature Matching using Brute force Hamming distance with cross-check.
+                </li>
+                <li>
+                    Outlier Rejection using RANSAC.
+                </li>
+            </p>
+
+            <script type="text/javascript" id="MathJax-script" async
+                src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+                </script>
         </div>
 
         <!-- Embedded Systems Details -->
