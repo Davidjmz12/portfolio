@@ -307,13 +307,21 @@ body {
     align-items: center;
     margin-bottom: var(--spacing-lg);
     padding-bottom: var(--spacing-md);
+    padding-left: var(--spacing-sm);
+    padding-right: var(--spacing-sm);
     border-bottom: 1px solid var(--glass-border);
+    gap: var(--spacing-md);
 }
 
 .modal-title {
     font-size: var(--font-size-2xl);
     font-weight: 700;
     color: #ffffff;
+    flex: 1;
+    text-align: left;
+    /* Default to left, can be changed in specific contexts */
+    line-height: 1.2;
+    overflow-wrap: break-word;
 }
 
 .modal-close {
@@ -324,6 +332,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    /* Prevent shrinking when title is long */
 }
 
 .modal-body {
@@ -577,10 +587,27 @@ body {
         background: inherit;
         z-index: 10;
         backdrop-filter: blur(12px);
-        /* Maintain glass effect */
         margin-top: -10px;
-        /* Offset for sticky header visual */
-        padding-top: 10px;
+        padding-top: 15px;
+        /* Increased padding */
+        padding-left: 10px;
+        padding-right: 10px;
+        width: calc(100% + 10px);
+        /* Slightly overflow to compensate for scrollbar or container padding */
+        margin-left: -5px;
+    }
+
+    .modal-title {
+        font-size: 1.25rem;
+        /* Slightly smaller for mobile if long */
+        padding-right: 5px;
+    }
+
+    .modal-close {
+        width: 32px;
+        /* Slightly smaller for mobile */
+        height: 32px;
+        font-size: 1.25rem;
     }
 
     /* Date Badge Fix for Mobile */

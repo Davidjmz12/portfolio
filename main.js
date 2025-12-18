@@ -182,7 +182,7 @@ function openProjectDetails(projectId) {
     modalOverlay.innerHTML = `
     <div class="modal-content">
       <div class="modal-header">
-        <h2 class="modal-title" style="margin: 0 auto;">${projectTitle}</h2>
+        <h2 class="modal-title">${projectTitle}</h2>
         <button class="modal-close btn-glass" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
