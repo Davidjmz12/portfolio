@@ -243,7 +243,82 @@
                         </div>
                     </div>
 
-                    <!-- Project Card 2: Card Game Backend -->
+                    <!-- Project Card 2: Transient Renderer-->
+                    <div class="project-card" data-project-id="transient-renderer">
+                        <div class="project-image">
+                            <img src="./assets/main_scene.png" alt="Path Tracer">
+                        </div>
+                        <div class="project-info">
+                            <a href="#" class="project-title">Transient Renderer</a>
+                            <p class="project-description">
+                                Research project in transient rendering that consists in researching materials with
+                                light re-emission delays. It creates a new mathematical framework to model this
+                                materials and implements them in <b>Mitransient</b>, a transient extension of
+                                <b>Mitsuba3</b>.
+                            </p>
+                            <div class="project-buttons">
+                                <a href="#" class="project-btn btn-glass">
+                                    <span>🏠</span> Project page
+                                </a>
+                                <!-- <a href="https://github.com/Davidjmz12/PathTracing" class="project-btn btn-glass">
+                                    <span>🔗</span> GitHub
+                                </a> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 3: ERAS5 API data retrieval-->
+                    <div class="project-card" data-project-id="eras5-api-data-retrieval">
+                        <div class="project-image">
+                            <img src="./assets/nc.png" alt="NcLibrary">
+                        </div>
+                        <div class="project-info">
+                            <a href="#" class="project-title">ERAS5 API data retrieval</a>
+                            <p class="project-description">
+                                Implemented a R app called NcLibrary for easy data retrieval and manipulation of
+                                reanalysis spatio-temporal data from ERA5 databases. It abstracts the connection to the
+                                Python API and offers a user-friendly interface to retrieval of data. Moreover, it
+                                manipulate the data to easily use in spatio-temporal models.
+                            </p>
+                            <div class="project-buttons">
+                                <a href="#" class="project-btn btn-glass">
+                                    <span>🏠</span> Project page
+                                </a>
+                                <a href="https://github.com/Davidjmz12/NcLibrary" class="project-btn btn-glass">
+                                    <span>🔗</span> GitHub
+                                </a>
+                                <a href="https://davidjmz12.github.io/NcLibrary/" class="project-btn btn-glass">
+                                    <span>🌐</span> Web Page
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 4: Spatio-temporal bayesian hierarchical model -->
+                    <div class="project-card" data-project-id="spatio-temporal-models">
+                        <div class="project-image">
+                            <img src="./assets/inla.png" alt="Path Tracer">
+                        </div>
+                        <div class="project-info">
+                            <a href="#" class="project-title">Spatio-temporal models</a>
+                            <p class="project-description">
+                                Implemented a spatio-temporal bayesian hierarchical model for the analysis of
+                                temperature trends for a span on 60 years in the region of <b>Aragon</b>. The model
+                                uses a new method called <b>INLA</b> for inference instead of traditional <b>MCMC</b>
+                                methods.
+                            </p>
+                            <div class="project-buttons">
+                                <a href="#" class="project-btn btn-glass">
+                                    <span>🏠</span> Project page
+                                </a>
+                                <a href="https://github.com/Davidjmz12/PathTracing" class="project-btn btn-glass">
+                                    <span>🔗</span> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project Card 5: Card Game Backend -->
                     <div class="project-card" data-project-id="card-game">
                         <div class="project-image">
                             <img src="./assets/logo.png" alt="Card Game Backend">
@@ -265,7 +340,7 @@
                         </div>
                     </div>
 
-                    <!-- Project Card 3: Mobile Robotics -->
+                    <!-- Project Card 6: Mobile Robotics -->
                     <div class="project-card" data-project-id="mobile-robotics">
                         <div class="project-image">
                             <img src="./assets/robot.jpg" alt="Mobile Robotics">
@@ -284,13 +359,13 @@
                         </div>
                     </div>
 
-                    <!-- Project Card 4: Embedded Systems -->
+                    <!-- Project Card 7: Embedded Systems -->
                     <div class="project-card" data-project-id="embedded-systems">
                         <div class="project-image">
                             <img src="./assets/simons.png" alt="Embedded Systems">
                         </div>
                         <div class="project-info">
-                            <a href="#" class="project-title">Embedded Systems Project: Simon Game</a>
+                            <a href="#" class="project-title">Embedded Simon Game</a>
                             <p class="project-description">
                                 Simons game implemented using C and Assembly for both nrf52840 microcontroller (physical
                                 board) and
@@ -306,6 +381,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -313,6 +389,9 @@
 
     <!-- Project Details Sections (Hidden by default) -->
     <div class="project-details-container">
+
+
+
         <!-- Path Tracer Details -->
         <div class="project-details" id="path-tracer-details">
             <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
@@ -377,6 +456,45 @@
             <div class="project-image-row">
                 <img src="./assets/xml.png" alt="XML" class="project-content-image">
             </div>
+        </div>
+
+        <!-- Transient Renderer Details -->
+        <div class="project-details" id="transient-renderer-details">
+            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
+
+            <h1>Project Overview</h1>
+            <p>
+                This research project creates a new theoretical framework to model materials that present ligh
+                re-emission delays, i.e, when light hits these materials, the light re-emission is not instantaneous,
+                but takes some time and, sometimes, the re-emission is not the same as the incident light. This is the
+                case for some fluorescent materials or for others, that, due to its complex geometry, the light
+                re-emission takes some time.
+
+            </p>
+        </div>
+
+        <!-- ERAS5 API data retrieval Details -->
+        <div class="project-details" id="eras5-api-data-retrieval-details">
+            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
+
+            <h1>Project Overview</h1>
+            <p>
+                This project implements from scratch a path tracer and photon mapping renderer using C++ and CMake.
+                The renderer is able to render scenes with realistic lighting, different materials like glass, metal,
+                plastic, etc. and different shapes like spheres, cylinders, planes, etc.
+            </p>
+        </div>
+
+        <!-- Spatio-temporal bayesian hierarchical model Details -->
+        <div class="project-details" id="spatio-temporal-bayesian-hierarchical-model-details">
+            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
+
+            <h1>Project Overview</h1>
+            <p>
+                This project implements from scratch a path tracer and photon mapping renderer using C++ and CMake.
+                The renderer is able to render scenes with realistic lighting, different materials like glass, metal,
+                plastic, etc. and different shapes like spheres, cylinders, planes, etc.
+            </p>
         </div>
 
         <!-- Card Game Details -->
