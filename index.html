@@ -246,10 +246,10 @@
                     <!-- Project Card 2: Transient Renderer-->
                     <div class="project-card" data-project-id="transient-renderer">
                         <div class="project-image">
-                            <img src="./assets/main_scene.png" alt="Path Tracer">
+                            <img src="./assets/tran.png" alt="Transient Renderer">
                         </div>
                         <div class="project-info">
-                            <a href="#" class="project-title">Transient Renderer</a>
+                            <a href="#" class="project-title">Transient Materials in Mitsuba3</a>
                             <p class="project-description">
                                 Research project in transient rendering that consists in studying materials with
                                 light re-emission delays like <b>phosphorescent</b> materials. It creates a new
@@ -273,7 +273,7 @@
                             <img src="./assets/nc.png" alt="NcLibrary">
                         </div>
                         <div class="project-info">
-                            <a href="#" class="project-title">ERAS5 data retrieval</a>
+                            <a href="#" class="project-title">ERAS5 data retrieval and manipulation</a>
                             <p class="project-description">
                                 Implemented a R app called NcLibrary for easy data retrieval and manipulation of
                                 reanalysis spatio-temporal data from ERA5 databases. It abstracts the connection to the
@@ -288,30 +288,6 @@
                                 </a>
                                 <a href="https://davidjmz12.github.io/NcLibrary/" class="project-btn btn-glass">
                                     <span>🌐</span> Web Page
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project Card 4: Spatio-temporal bayesian hierarchical model -->
-                    <div class="project-card" data-project-id="spatio-temporal-models">
-                        <div class="project-image">
-                            <img src="./assets/inla.png" alt="Path Tracer">
-                        </div>
-                        <div class="project-info">
-                            <a href="#" class="project-title">Spatio-temporal models</a>
-                            <p class="project-description">
-                                Implemented a spatio-temporal bayesian hierarchical model for the analysis of
-                                temperature trends for a span on 60 years in the region of <b>Aragon</b>. The model
-                                uses a new method called <b>INLA</b> for inference instead of traditional <b>MCMC</b>
-                                methods.
-                            </p>
-                            <div class="project-buttons">
-                                <a href="#" class="project-btn btn-glass">
-                                    <span>🏠</span> Project page
-                                </a>
-                                <a href="https://github.com/Davidjmz12/PathTracing" class="project-btn btn-glass">
-                                    <span>🔗</span> GitHub
                                 </a>
                             </div>
                         </div>
@@ -389,8 +365,6 @@
     <!-- Project Details Sections (Hidden by default) -->
     <div class="project-details-container">
 
-
-
         <!-- Path Tracer Details -->
         <div class="project-details" id="path-tracer-details">
             <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
@@ -408,6 +382,7 @@
                 <img src="./assets/g1.png" alt="Geometries" class="project-content-image">
                 <img src="./assets/g2.png" alt="Geometries" class="project-content-image">
             </div>
+            <p class="project-caption">Different geometries primitives supported.</p>
             It supports the following geometries:
             <ul>
                 <li>Spheres, cylinders, planes, cones, ellipsoids, boxes.</li>
@@ -419,8 +394,7 @@
                 <img src="./assets/t1.png" alt="Textures" class="project-content-image">
                 <img src="./assets/ply2.png" alt="Textures" class="project-content-image">
             </div>
-            It supports textures for both 3D triangle meshes and the other geometries. The input texture must be in
-            <b>PPM</b> format.
+            <p class="project-caption">Textures for both 3D triangle meshes and the other geometries.</p>
 
             <h2>Optimization</h2>
             <p>
@@ -437,7 +411,10 @@
                 <img src="./assets/intersections_avoided.png" alt="Intersections Avoided" class="project-content-image">
                 <img src="./assets/threads.png" alt="Threads" class="project-content-image">
             </div>
+            <p class="project-caption">Time to render a basic scene. <b>Left:</b> Using and not using bounding boxes.
+                <b>Right:</b> Different number of threads.
             </p>
+
             <h3>Results</h3>
             <p>The implementation of threads reduced the rendering time by a factor equal to the number of threads used
                 (up to a point).
@@ -455,22 +432,24 @@
             <div class="project-image-row">
                 <img src="./assets/xml.png" alt="XML" class="project-content-image">
             </div>
+            <p class="project-caption">XML file example.</p>
         </div>
 
         <!-- Transient Renderer Details -->
         <div class="project-details" id="transient-renderer-details">
-            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
+            <img src="./assets/tran.png" alt="Transient Renderer" class="project-header-image" style="width: 60%;">
 
             <h1>Project Overview</h1>
             <p>
-                This is a research in <b>Transient Rendering</b> a type of rendering that, to make it simple, models how
-                the light flies throughout all the scene and how it interacts with the materials. In this framework,
+                This project is a research in <b>Transient Rendering</b> a type of rendering that, to make it simple,
+                models how
+                the light flies throughout the scene and how it interacts with the materials. In this framework,
                 instead of rendering a static scene (which is what the human eye sees and traditional rendering does),
-                we render a capture of the scene at a given time, giving as a result a video.
+                we render the scene at each time step, giving as a result a video.
             </p>
 
             <video src="./assets/ref.webm" controls class="project-content-image"></video>
-            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+            <p class="project-caption">
                 Example of a transient video.
             </p>
             <p>
@@ -485,7 +464,7 @@
             <div class="project-image-row">
                 <img src="./assets/transient-mat.png" alt="Time of flight" class="project-content-image">
             </div>
-            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+            <p class="project-caption">
                 Illustration of light interacting with a transient material. Left: light path. Right: temporal
                 components where blue represents arrival and orange represents re-emission after a delay.
             </p>
@@ -495,7 +474,7 @@
 
             <p>
                 The materials appearance is given by its BRDF, i.e, a function that defines how the materials interact
-                with light. In the transient spectrum this function depends also on the time delay \(\Delta t\):
+                with light. In the transient spectrum, this function depends also on the time delay \(\Delta t\):
 
                 \[
                 f_r(x, \omega_i, \omega_o, \Delta t)
@@ -507,15 +486,16 @@
                 f_r(x, \omega_i, \omega_o, \Delta t) = f_s(x, \omega_i, \omega_o) \cdot f_t(\Delta t)
                 \]
 
-                and to model the space component, we use a probability density function (pdf) that models the
-                distribution of the delays \(\Delta t\). Three pdfs are used: Constant, Exponential and Epanechnikov:
+                To model the time component, we use a probability density function (pdf) that models the
+                distribution of the delays \(p(\Delta t)\). Three pdfs are used: Constant, Exponential and Epanechnikov:
 
                 <img src="./assets/tp.png" alt="PDFs" class="project-content-image" style="width: 90%;">
-            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+            <p class="project-caption">
                 Constant, Exponential and Epanechnikov pdfs.
             </p>
 
-            For example, a constant distribution with value \(c=1) means that the re-emission delay is one.
+            For example, a constant distribution with value \(c=1\) means that the light re-emission delay is always
+            one.
 
 
             <br><br>
@@ -526,51 +506,78 @@
             <h3>Results</h3>
 
             <p>
-                Certain materials such as Chlorophyll, presents a complex re-emission profile. When light hits the
+                Certain materials such as <b>Chlorophyll</b>, presents a complex re-emission profile. When light hits
+                the
                 Chlorophyll, it re-emits most of the light instantaneously with a green color, but a small amount of
                 light is re-emitted
                 after a delay of one with a red color.
 
                 <br><br>
 
-                Using our models we now can model these materiales in the transient spectrum:
+                Using our models we now can model these materiales in the transient spectrum. In this scene, there are
+                some leaves with a Chlorophyll material. Note how a first green pulse is emmited at the same time as the
+                rest of the scene, and later, a red pulse is emmited just in these leaves.
 
-            <div class="project-image-row">
-                <img src="./assets/tp.png" alt="TP" class="project-content-image">
-                <video src="./assets/tp.mp4" controls class="project-content-image"></video>
+            <div class="project-image-row" style="width: 90%;">
+                <img src="./assets/nori2.png" alt="TP" class="project-content-image">
+                <video src="./assets/nori2.webm" controls class="project-content-image"></video>
             </div>
 
-            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+            <p class="project-caption">
                 <b>Left:</b> Static image result <b>Right:</b> Transient video result.
             </p>
 
-            Notice how the transient result is encoding information that is not present in the static one.
 
             </p>
 
         </div>
 
         <!-- ERAS5 API data retrieval Details -->
-        <div class="project-details" id="eras5-api-data-retrieval-details">
-            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
+        <div class="project-details" id="eras5-data-retrieval-details">
+            <img src="./assets/nc.png" alt="ERAS5 API" class="project-header-image" style="width: 30%;">
 
             <h1>Project Overview</h1>
             <p>
-                This project implements from scratch a path tracer and photon mapping renderer using C++ and CMake.
-                The renderer is able to render scenes with realistic lighting, different materials like glass, metal,
-                plastic, etc. and different shapes like spheres, cylinders, planes, etc.
+                This project is a data retrieval system for the <b>ERAS5</b> reanalysis dataset. Before this project,
+                the data was only accessible using the API provided in Python, making it not suitable for R scripts.
+                Moreover, it required a lot of time to understand how the data was structured and how to access it.
+                Moreover, the structure provided was not suitable for multiple statistical analysis where one row
+                dataframes for spatio-temporal analysis are sometimes required.
+
+
+                <br><br>
+
+                In this project we implemented a pipeline to abstract this process to a R user. The pipeline used both
+                code in Python and R to retrieve the data and process it as the user requires it. It gives the user
+                high-level functions to make the data retrieval and also a GUI to make the pettition even easier and
+                more intuitive.
+
+                <br><br>
+
+                This project was made as a internship for the Statistical Methods Department at the University of
+                Zaragoza.
+            <div class="project-image-row" style="width: 90%;">
+                <img src="./assets/im2.png" alt="ERAS5" class="project-content-image">
+                <img src="./assets/im1.png" alt="ERAS5" class="project-content-image">
+            </div>
+            <p class="project-caption">
+                <b>Left:</b> Format of the data retrieved from the ERA5 database. <b>Right:</b> Format of the data given
+                by the pipeline and required for statistical analysis.
             </p>
-        </div>
+            </p>
 
-        <!-- Spatio-temporal bayesian hierarchical model Details -->
-        <div class="project-details" id="spatio-temporal-bayesian-hierarchical-model-details">
-            <img src="./assets/main_scene.png" alt="Path Tracer" class="project-header-image">
-
-            <h1>Project Overview</h1>
+            <h2>Results</h2>
             <p>
-                This project implements from scratch a path tracer and photon mapping renderer using C++ and CMake.
-                The renderer is able to render scenes with realistic lighting, different materials like glass, metal,
-                plastic, etc. and different shapes like spheres, cylinders, planes, etc.
+                The pipeline was successfully implemented and used by the department to retrieve data for their
+                analysis. The project was also presented at the <b>II CONGRES DE R I XIII JORNADES D'USUARIS DE R</b>
+                conference.
+
+                <img src="./assets/gui.png" alt="GUI of the pipeline" class="project-content-image">
+            <p class="project-caption">
+                GUI of the pipeline.
+            </p>
+
+
             </p>
         </div>
 
@@ -640,6 +647,7 @@
             <h2>Path Planning & Navigation</h2>
             <video src="./assets/A*.mp4" controls class="project-content-image">
             </video>
+            <p class="project-caption">Path replanning using A* algorithm after obstacle detection.</p>
             <p>
                 For navigating complex maze environments, we implemented the <b>A* Algorithm</b> on an 8-directional
                 grid.
@@ -662,6 +670,7 @@
 
             <h2>Computer Vision: Ball Tracking</h2>
             <img src="./assets/catchh.png" alt="Ball Tracking" class="project-content-image">
+            <p class="project-caption">Ball tracked and caught by the robot.</p>
             <p>
                 The visual tracking system processes camera input to identify and approach target objects. The pipeline
                 includes:
@@ -678,6 +687,7 @@
 
             <h2>Feature-Based Image Detection</h2>
             <img src="./assets/tracking.png" alt="Image Detection" class="project-content-image">
+            <p class="project-caption">Detection of a specific image using feature matching in a robot.</p>
             <p>
                 To recognize specific markers or locations, the robot employs a feature matching pipeline:
             </p>
@@ -697,7 +707,7 @@
 
         <!-- Embedded Systems Details -->
         <div class="project-details" id="embedded-systems-details">
-            <img src="./assets/nrf.png" alt="Simon Game" class="project-content-image">
+            <img src="./assets/nrf.png" alt="Simon Game" class="project-header-image" style="width: 50%;">
 
             <h1>Project Overview</h1>
             <p>
@@ -731,7 +741,9 @@
                 <li>Putting the microcontroller in sleep mode to reduce power consumption when not in use.</li>
             </ul>
 
+
         </div>
+
     </div>
 
     <!-- Modal for Contact -->
