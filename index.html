@@ -251,10 +251,10 @@
                         <div class="project-info">
                             <a href="#" class="project-title">Transient Renderer</a>
                             <p class="project-description">
-                                Research project in transient rendering that consists in researching materials with
-                                light re-emission delays. It creates a new mathematical framework to model this
-                                materials and implements them in <b>Mitransient</b>, a transient extension of
-                                <b>Mitsuba3</b>.
+                                Research project in transient rendering that consists in studying materials with
+                                light re-emission delays like <b>phosphorescent</b> materials. It creates a new
+                                mathematical framework to model this materials and implements them in
+                                <b>Mitransient</b>, a transient extension of <b>Mitsuba3</b>.
                             </p>
                             <div class="project-buttons">
                                 <a href="#" class="project-btn btn-glass">
@@ -268,17 +268,16 @@
                     </div>
 
                     <!-- Project Card 3: ERAS5 API data retrieval-->
-                    <div class="project-card" data-project-id="eras5-api-data-retrieval">
+                    <div class="project-card" data-project-id="eras5-data-retrieval">
                         <div class="project-image">
                             <img src="./assets/nc.png" alt="NcLibrary">
                         </div>
                         <div class="project-info">
-                            <a href="#" class="project-title">ERAS5 API data retrieval</a>
+                            <a href="#" class="project-title">ERAS5 data retrieval</a>
                             <p class="project-description">
                                 Implemented a R app called NcLibrary for easy data retrieval and manipulation of
                                 reanalysis spatio-temporal data from ERA5 databases. It abstracts the connection to the
-                                Python API and offers a user-friendly interface to retrieval of data. Moreover, it
-                                manipulate the data to easily use in spatio-temporal models.
+                                Python API and offers a user-friendly interface to retreive and manipulate the data.
                             </p>
                             <div class="project-buttons">
                                 <a href="#" class="project-btn btn-glass">
@@ -464,13 +463,91 @@
 
             <h1>Project Overview</h1>
             <p>
+                This is a research in <b>Transient Rendering</b> a type of rendering that, to make it simple, models how
+                the light flies throughout all the scene and how it interacts with the materials. In this framework,
+                instead of rendering a static scene (which is what the human eye sees and traditional rendering does),
+                we render a capture of the scene at a given time, giving as a result a video.
+            </p>
+
+            <video src="./assets/ref.webm" controls class="project-content-image"></video>
+            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+                Example of a transient video.
+            </p>
+            <p>
                 This research project creates a new theoretical framework to model materials that present ligh
                 re-emission delays, i.e, when light hits these materials, the light re-emission is not instantaneous,
-                but takes some time and, sometimes, the re-emission is not the same as the incident light. This is the
-                case for some fluorescent materials or for others, that, due to its complex geometry, the light
-                re-emission takes some time.
+                but takes some time. This is the case for some fluorescent materials or others, that, due to its
+                complex geometry, the light re-emission takes some time. We will call these materials <b>transient
+                    materials</b>.
+            </p>
+
+
+            <div class="project-image-row">
+                <img src="./assets/transient-mat.png" alt="Time of flight" class="project-content-image">
+            </div>
+            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+                Illustration of light interacting with a transient material. Left: light path. Right: temporal
+                components where blue represents arrival and orange represents re-emission after a delay.
+            </p>
+
+
+            <h2>Modelling of Transient Materials</h2>
+
+            <p>
+                The materials appearance is given by its BRDF, i.e, a function that defines how the materials interact
+                with light. In the transient spectrum this function depends also on the time delay \(\Delta t\):
+
+                \[
+                f_r(x, \omega_i, \omega_o, \Delta t)
+                \]
+
+                To model this function, we suppose separability between space and temporal components:
+
+                \[
+                f_r(x, \omega_i, \omega_o, \Delta t) = f_s(x, \omega_i, \omega_o) \cdot f_t(\Delta t)
+                \]
+
+                and to model the space component, we use a probability density function (pdf) that models the
+                distribution of the delays \(\Delta t\). Three pdfs are used: Constant, Exponential and Epanechnikov:
+
+                <img src="./assets/tp.png" alt="PDFs" class="project-content-image" style="width: 90%;">
+            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+                Constant, Exponential and Epanechnikov pdfs.
+            </p>
+
+            For example, a constant distribution with value \(c=1) means that the re-emission delay is one.
+
+
+            <br><br>
+
+            More complex models relaxing the separability assumptions were made to model more complex materials.
+            </p>
+
+            <h3>Results</h3>
+
+            <p>
+                Certain materials such as Chlorophyll, presents a complex re-emission profile. When light hits the
+                Chlorophyll, it re-emits most of the light instantaneously with a green color, but a small amount of
+                light is re-emitted
+                after a delay of one with a red color.
+
+                <br><br>
+
+                Using our models we now can model these materiales in the transient spectrum:
+
+            <div class="project-image-row">
+                <img src="./assets/tp.png" alt="TP" class="project-content-image">
+                <video src="./assets/tp.mp4" controls class="project-content-image"></video>
+            </div>
+
+            <p style="text-align: center; font-style: italic; font-size: 1.0em; color: #888; margin-top: -10px;">
+                <b>Left:</b> Static image result <b>Right:</b> Transient video result.
+            </p>
+
+            Notice how the transient result is encoding information that is not present in the static one.
 
             </p>
+
         </div>
 
         <!-- ERAS5 API data retrieval Details -->
