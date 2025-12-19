@@ -67,21 +67,33 @@ body {
     height: 100vh;
     z-index: -1;
     overflow: hidden;
+    background: #050505;
+    /* Deep space base color */
 }
 
-.hero-background::before {
-    content: '';
+#starfield {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 0;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
     background-image: url('./assets/bg2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.7);
+    filter: brightness(0.6) saturate(1.2);
     z-index: -2;
+    animation: nebulaDrift 60s linear infinite alternate;
 }
 
 .hero-background::after {
@@ -91,11 +103,22 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(180deg,
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%),
+        linear-gradient(180deg,
             rgba(0, 0, 0, 0.3) 0%,
             rgba(0, 0, 0, 0.5) 50%,
             rgba(0, 0, 0, 0.7) 100%);
     z-index: -1;
+}
+
+@keyframes nebulaDrift {
+    from {
+        transform: scale(1) translate(0, 0);
+    }
+
+    to {
+        transform: scale(1.1) translate(-2%, -2%);
+    }
 }
 
 /* ==================== MAIN CONTAINER ==================== */

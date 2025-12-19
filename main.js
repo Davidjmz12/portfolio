@@ -329,6 +329,77 @@ ${message}`;
     window.location.href = mailtoUrl;
 }
 
+// ==================== STARFIELD BACKGROUND ====================
+
+/**
+ * Creates and animates a subtle starfield on a canvas
+ */
+function initStarfield() {
+    const canvas = document.getElementById('starfield');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    let width, height, stars = [];
+
+    // Configuration
+    const STAR_COUNT = 150;
+    const SPEED = 0.05;
+
+    /**
+     * Resizes canvas and regenerates stars
+     */
+    function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+
+        // Regenerate stars for new dimensions
+        stars = [];
+        for (let i = 0; i < STAR_COUNT; i++) {
+            stars.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 1.5 + 0.5,
+                opacity: Math.random() * 0.5 + 0.3,
+                speed: (Math.random() * 0.5 + 0.1) * SPEED
+            });
+        }
+    }
+
+    /**
+     * Animation loop
+     */
+    function animate() {
+        ctx.clearRect(0, 0, width, height);
+
+        ctx.fillStyle = '#ffffff';
+        stars.forEach(star => {
+            // Update position
+            star.y -= star.speed * 20; // Move upwards slowly
+
+            // Wrap around
+            if (star.y < 0) {
+                star.y = height;
+                star.x = Math.random() * width;
+            }
+
+            // Draw star
+            ctx.globalAlpha = star.opacity;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+            ctx.fill();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    animate();
+}
+
+
 // ==================== INITIALIZATION ====================
 
 /**
@@ -344,6 +415,9 @@ function initAnimations() {
         if (heroContent) heroContent.style.opacity = '1';
         if (socialLinks) socialLinks.style.opacity = '1';
         if (navButtonsContainer) navButtonsContainer.style.opacity = '1';
+
+        // Initialize starfield after a short delay for smoothness
+        initStarfield();
     }, 100);
 }
 
